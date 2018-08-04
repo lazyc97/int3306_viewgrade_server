@@ -1,0 +1,17 @@
+version: "2.3"
+
+services:
+  api_server:
+    build:
+      context: .
+      target: api_server_dev
+    ports:
+      - 80:80
+    volumes:
+      - storage:/storage
+      - ./tornado:/app
+      - ./conf/nginx.conf:/etc/nginx/nginx.conf
+    environment:
+      - DEBUG=1
+    depends_on:
+      - database
