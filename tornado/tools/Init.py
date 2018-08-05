@@ -12,9 +12,9 @@ async def createAdminUser(app):
             "passwordHash": getPasswordHash("admin"),
             "subscribedClasses": [],
         })
-        app.settings["adminId"] = result.inserted_id
+        app.settings["adminId"] = str(result.inserted_id)
     else:
-        app.settings["adminId"] = result["_id"]
+        app.settings["adminId"] = str(result["_id"])
 
 
 async def init(app):
