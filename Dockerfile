@@ -1,6 +1,6 @@
 # Database
 FROM mongo:4-xenial AS database
-COPY ./conf/db_init.js /docker-entrypoint-initdb.d/db_init.js
+COPY ./conf/DbInit.js /docker-entrypoint-initdb.d/DbInit.js
 
 # API server
 FROM nginx:alpine AS api_server_dev
