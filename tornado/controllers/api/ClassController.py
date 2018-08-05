@@ -7,15 +7,15 @@ class ClassController(BaseApiHandler):
 
     # add a class
     async def post(self):
-        await self.checkAdminAccess()
+        self.checkAdminAccess()
         pass
 
     # update a class
     async def put(self):
-        await self.checkAdminAccess()
+        self.checkAdminAccess()
         pass
 
     # delete a class
     async def delete(self):
-        await self.checkAdminAccess()
+        self.checkAdminAccess()
         pass

@@ -1,6 +1,9 @@
 version: "2.3"
 
 services:
+  database:
+    ports:
+      - 27017:27017
   api_server:
     build:
       context: .
@@ -8,6 +11,7 @@ services:
     ports:
       - 80:80
     volumes:
+      - api_server_log:/var/log/tornado
       - storage:/storage
       - ./tornado:/app
       - ./conf/nginx.conf:/etc/nginx/nginx.conf

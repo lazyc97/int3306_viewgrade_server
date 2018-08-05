@@ -1,3 +1,4 @@
 motor
+passlib
 PyJWT
 tornado

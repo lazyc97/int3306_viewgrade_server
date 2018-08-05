@@ -34,12 +34,12 @@ class BaseApiHandler(tornado.web.RequestHandler):
 
     def checkUserAccess(self):
         if self.getUserId() is None:
-            self.permissionDeny()
+            self.throwError(403)
 
-    async def checkAdminAccess(self):
-        pass
+    def checkAdminAccess(self):
+        if self.getUserId() != self.settings["adminId"]:
+            self.throwError(403)
 
-    def permissionDeny(self):
-        self.set_status(403)
-        self.write("Permission denied.")
+    def throwError(self, errorCode):
+        self.set_status(errorCode)
         self.finish()
