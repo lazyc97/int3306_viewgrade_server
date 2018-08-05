@@ -6,14 +6,19 @@ from .BaseApiHandler import BaseApiHandler
 
 
 class YearController(BaseApiHandler):
-    # get years/semesters layout
+    # get info of years
     async def get(self):
         self.checkUserAccess()
-        result = await self.settings["db"]["years"].find_one({
-            "_id": ObjectId(self.json["_id"])
-        })
-        result["_id"] = str(result["_id"])
-        self.write(result)
+        result = self.settings["db"]["years"].find({})
+
+        items = []
+        async for item in result:
+            item["_id"] = str(item["_id"])
+            items.append(item)
+
+        self.write(json.dumps({
+            "years": items
+        }))
 
 
     # add a university year
