@@ -1,8 +1,3 @@
-db.auth({
-    user: 'root',
-    pwd: 'root',
-})
-
 db = db.getSiblingDB('viewgrade')
 
 db.createCollection('users');
