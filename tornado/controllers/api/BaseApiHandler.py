@@ -5,15 +5,15 @@ from tools import Env
 
 class BaseApiHandler(tornado.web.RequestHandler):
     def prepare(self):
-        if self.request.headers.get("Content-Type", "").startswith("application/json"):
+        try:
             if len(self.request.body) > 0:
                 self.json = json.loads(self.request.body)
             else:
                 self.json = {}
 
             self.set_header("Content-Type", "application/json")
-        else:
-            self.write("Not JSON content type.")
+        except e:
+            self.write("Cannot parse request content.")
             self.set_status(400)
             self.finish()
 

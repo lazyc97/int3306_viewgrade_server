@@ -53,7 +53,7 @@ class YearController(BaseApiHandler):
     async def delete(self):
         self.checkAdminAccess()
         result = await self.settings["db"]["years"].delete_one({
-            "_id": ObjectId(self.json["_id"]),
+            "_id": ObjectId(self.get_argument("_id")),
         })
 
         self.write(json.dumps({

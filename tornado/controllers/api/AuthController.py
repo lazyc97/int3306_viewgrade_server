@@ -9,7 +9,7 @@ from .BaseApiHandler import BaseApiHandler
 
 class AuthController(BaseApiHandler):
     # login
-    async def get(self):
+    async def post(self):
         result = await self.settings["db"]["users"].find_one({
             "username": str(self.json["username"])
         })

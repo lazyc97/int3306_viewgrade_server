@@ -13,6 +13,9 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root
       - MONGO_INITDB_ROOT_PASSWORD=root
       - MONGO_INITDB_DATABASE=viewgrade
+  api_server:
+    depends_on:
+      - database
 
 volumes:
   storage:

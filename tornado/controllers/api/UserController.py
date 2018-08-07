@@ -11,11 +11,11 @@ class UserController(BaseApiHandler):
     # get user info
     async def get(self):
         userId = self.getUserId()
-        if userId != self.json["_id"] and userId != self.settings["adminId"]:
+        if userId != self.get_argument("_id") and userId != self.settings["adminId"]:
             self.throwError(403)
 
         result = await self.settings["db"]["users"].find_one({
-            "_id": ObjectId(self.json["_id"]),
+            "_id": ObjectId(self.get_argument("_id")),
         }, {
             "passwordHash": 0,
         })

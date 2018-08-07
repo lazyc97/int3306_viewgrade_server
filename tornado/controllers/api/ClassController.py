@@ -10,7 +10,7 @@ class ClassController(BaseApiHandler):
     async def get(self):
         self.checkUserAccess()
         result = self.settings["db"]["classes"].find({
-            "semesterId": ObjectId(self.json["semesterId"])
+            "semesterId": ObjectId(self.get_argument("semesterId"))
         })
 
         items = []
@@ -20,7 +20,7 @@ class ClassController(BaseApiHandler):
             items.append(item)
 
         self.write(json.dumps({
-            "semesterId": self.json["semesterId"],
+            "semesterId": self.get_argument("semesterId"),
             "classes": items,
         }))
 
@@ -62,7 +62,7 @@ class ClassController(BaseApiHandler):
     async def delete(self):
         self.checkAdminAccess()
         result = await self.settings["db"]["classes"].delete_one({
-            "_id": ObjectId(self.json["_id"]),
+            "_id": ObjectId(self.get_argument("_id")),
         })
 
         self.write(json.dumps({
