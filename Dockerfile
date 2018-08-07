@@ -1,6 +1,7 @@
 # Database
 FROM mongo:4-xenial AS database
 COPY ./conf/DbInit.js /docker-entrypoint-initdb.d/DbInit.js
+COPY ./conf/DbDummyGen.js /tools/DbDummyGen.js
 
 # API server
 FROM nginx:alpine AS api_server_dev
