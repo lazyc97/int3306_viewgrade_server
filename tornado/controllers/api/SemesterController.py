@@ -17,7 +17,6 @@ class SemesterController(BaseApiHandler):
         items = []
         async for item in result:
             item["_id"] = str(item["_id"])
-            item["startDate"] = datetime.strftime(item["startDate"], "%Y-%m-%d")
             item["yearId"] = str(item["yearId"])
             items.append(item)
 

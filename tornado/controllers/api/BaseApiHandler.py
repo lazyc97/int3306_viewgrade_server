@@ -1,21 +1,26 @@
+import logging
+import pprint
 import json
+
 import jwt
 import tornado
+
 from tools import Env
 
 class BaseApiHandler(tornado.web.RequestHandler):
     def prepare(self):
-        try:
-            if len(self.request.body) > 0:
-                self.json = json.loads(self.request.body)
-            else:
-                self.json = {}
+        if self.request.headers.get("Content-Type") == "application/json":
+            try:
+                if len(self.request.body) > 0:
+                    self.json = json.loads(self.request.body)
+                else:
+                    self.json = {}
 
-            self.set_header("Content-Type", "application/json")
-        except e:
-            self.write("Cannot parse request content.")
-            self.set_status(400)
-            self.finish()
+                self.set_header("Content-Type", "application/json")
+            except:
+                self.write("Cannot parse request content.")
+                self.set_status(400)
+                self.finish()
 
     def getUserId(self):
         userId = None
@@ -43,3 +48,6 @@ class BaseApiHandler(tornado.web.RequestHandler):
     def throwError(self, errorCode):
         self.set_status(errorCode)
         self.finish()
+
+    def logInfo(self, msg):
+        logging.getLogger("tornado.general").info(pprint.pformat(msg))

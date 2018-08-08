@@ -1,3 +1,4 @@
+import datetime
 import json
 
 import jwt
@@ -15,7 +16,9 @@ class AuthController(BaseApiHandler):
         })
         if verifyPassword(self.json["password"], result["passwordHash"]):
             token = jwt.encode({
-                "userId": str(result["_id"])
+                "userId": str(result["_id"]),
+                "nbf": datetime.datetime.utcnow(),
+                "exp": datetime.datetime.utcnow() + datetime.timedelta(seconds=3600),
             }, JWT_KEY)
             self.write(json.dumps({ "token": token.decode("utf-8") }))
         else:
