@@ -11,6 +11,7 @@ from controllers.api.ClassController import ClassController
 from controllers.api.SemesterController import SemesterController
 from controllers.api.YearController import YearController
 from controllers.api.AuthController import AuthController
+from controllers.api.FileUploadController import FileUploadController
 
 
 ROUTES = [
@@ -20,6 +21,7 @@ ROUTES = [
     (r"/api/semester/", SemesterController),
     (r"/api/year/", YearController),
     (r"/api/auth/", AuthController),
+    (r"/api/fileupload/", FileUploadController),
 ]
 
 MONGO_URI = "mongodb://{0}:{1}@database:27017/admin".format("root", "root")

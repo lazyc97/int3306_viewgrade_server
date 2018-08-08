@@ -11,6 +11,7 @@ WORKDIR /app
 COPY ./tornado/requirements.txt /app/requirements.txt
 RUN pip3 install -r requirements.txt
 
+RUN mkdir -p /storage/pdf
 CMD nginx && python3 main.py
 
 FROM api_server_dev AS api_server_prod
